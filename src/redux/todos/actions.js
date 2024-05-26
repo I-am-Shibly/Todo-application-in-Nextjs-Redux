@@ -22,7 +22,7 @@ export const fetched = (todos) => {
   };
 };
 
-export const toggled = (todoId) => {
+export const toggled = (todoId, status) => {
   return {
     type: TOGGLED,
     payload: todoId,

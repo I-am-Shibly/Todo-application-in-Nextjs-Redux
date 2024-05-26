@@ -15,8 +15,14 @@ export default function Header() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(added(input));
-    setInput('');
+
+    if (input?.trim() !== '') {
+      dispatch(added(input));
+      setInput('');
+      return;
+    }
+
+    alert('Empty input!');
   };
 
   const completeHadler = () => {

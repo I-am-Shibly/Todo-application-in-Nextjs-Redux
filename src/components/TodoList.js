@@ -13,7 +13,7 @@ export default function TodoList() {
   useEffect(() => {
     // Dispatch action to fetch todos from localStorage when component mounts
     const todos = JSON.parse(localStorage.getItem('todos')) || [];
-    dispatch(fetched(todos)); // Pass todos as the payload to the fetched action
+    dispatch(fetched(todos));
   }, [dispatch]);
 
   const filterByStatus = (todo) => {
@@ -43,8 +43,9 @@ export default function TodoList() {
       {todos
         .filter(filterByStatus)
         .filter(filterByColors)
+        .filter((todo) => !!todo)
         .map((todo) => (
-          <Todo todo={todo} key={todo.id} />
+          <Todo todo={todo} key={todo?.id} />
         ))}
     </div>
   );
