@@ -18,10 +18,6 @@ export default function Home() {
           <hr className="mt-4" />
 
           <TodoList />
-
-          <hr className="mt-4" />
-
-          <Footer />
         </div>
       </div>
     </Provider>
