@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Todo from './Todo';
 import { useEffect, useState } from 'react';
 import { fetched } from '@/redux/todos/actions';
-import Footer from './Footer'; // Make sure to import Footer
+import Footer from './Footer';
 
 export default function TodoList() {
   const todos = useSelector((state) => state.todos);
@@ -51,6 +51,7 @@ export default function TodoList() {
   const currentTodos = filteredTodos.slice(indexOfFirstTodo, indexOfLastTodo);
 
   const totalPages = Math.ceil(filteredTodos.length / todosPerPage);
+  const isNextPageEmpty = filteredTodos.length <= indexOfLastTodo;
 
   return (
     <div>
@@ -60,14 +61,15 @@ export default function TodoList() {
         ) : (
           <h1>No todo found!</h1>
         )}
-          </div>
-          
+      </div>
+      
       <hr className="mt-4" />
 
       <Footer
         currentPage={currentPage}
         totalPages={totalPages}
         setCurrentPage={setCurrentPage}
+        isNextPageEmpty={isNextPageEmpty}
       />
     </div>
   );

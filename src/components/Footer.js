@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { colorChanged, statusChanged } from '../redux/filters/actions';
 import { Pagination } from './Pagination';
@@ -14,7 +13,12 @@ const numberOfTodos = (no_of_todos) => {
   }
 };
 
-export default function Footer({ currentPage, totalPages, setCurrentPage }) {
+export default function Footer({
+  currentPage,
+  totalPages,
+  setCurrentPage,
+  isNextPageEmpty,
+}) {
   const todos = useSelector((state) => state.todos);
   const filters = useSelector((state) => state.filters);
 
@@ -89,6 +93,7 @@ export default function Footer({ currentPage, totalPages, setCurrentPage }) {
         currentPage={currentPage}
         totalPages={totalPages}
         setCurrentPage={setCurrentPage}
+        isNextPageEmpty={isNextPageEmpty}
       />
     </div>
   );
