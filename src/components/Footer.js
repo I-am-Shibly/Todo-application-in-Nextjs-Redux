@@ -59,7 +59,7 @@ export default function Footer({ currentPage, totalPages, setCurrentPage }) {
             className={`cursor-pointer ${status === 'Complete' && 'font-bold'}`}
             onClick={() => handleStatusChange('Complete')}
           >
-            Complete
+            Completed
           </li>
           <li></li>
           <li></li>
