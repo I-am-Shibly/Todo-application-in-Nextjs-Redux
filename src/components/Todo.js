@@ -54,11 +54,11 @@ export default function Todo({ todo, currentEditingId, setCurrentEditingId }) {
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       handleEdit();
-      return
+      return;
     }
 
     if (event.key === 'Escape') {
-      setIsEditing(false)
+      setIsEditing(false);
     }
   };
 
@@ -76,9 +76,7 @@ export default function Todo({ todo, currentEditingId, setCurrentEditingId }) {
     >
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 select-none">
         {isHovered && !isEditing && (
-          <div className="text-gray-600 text-xs">
-            Click twice to edit
-          </div>
+          <div className="text-gray-600 text-xs">Click twice to edit</div>
         )}
         {isEditing && (
           <div
@@ -113,7 +111,7 @@ export default function Todo({ todo, currentEditingId, setCurrentEditingId }) {
         </div>
       </div>
 
-      <div className={`select-none flex-1 ${completed && 'line-through'}`}>
+      <div className={'flex-1'}>
         {isEditing ? (
           <div className="flex items-center flex-1 space-x-2">
             <input
@@ -143,7 +141,9 @@ export default function Todo({ todo, currentEditingId, setCurrentEditingId }) {
             </button>
           </div>
         ) : (
-          text
+          <div className={`select-none ${completed && 'line-through'}`}>
+            {text}
+          </div>
         )}
       </div>
 
