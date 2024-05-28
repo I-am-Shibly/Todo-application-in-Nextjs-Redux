@@ -2,12 +2,17 @@
 
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import { colorSelected, deleted, toggled } from '../redux/todos/actions';
+import { useState } from 'react';
+import { colorSelected, deleted, toggled, textEdited } from '../redux/todos/actions';
 
 export default function Todo({ todo }) {
   const dispatch = useDispatch();
 
   const { text, id, completed, color } = todo;
+
+  const [isHovered, setIsHovered] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(text);
 
   const handleStatusChange = (todoId) => {
     dispatch(toggled(todoId));
@@ -21,8 +26,28 @@ export default function Todo({ todo }) {
     dispatch(deleted(todoId));
   };
 
+  const handleEdit = () => {
+    dispatch(textEdited(id, editedText));
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setEditedText(text);
+    setIsEditing(false);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleEdit();
+    }
+  };
+
   return (
-    <div className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
+    <div
+      className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div
         className={`relative rounded-full bg-white border-2 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 ${
           completed ? 'border-green-500' : 'border-gray-400'
@@ -44,9 +69,42 @@ export default function Todo({ todo }) {
         )}
       </div>
 
-      <div className={`select-none flex-1 ${completed && 'line-through'}`}>
-        {text}
-      </div>
+      {isEditing ? (
+        <div className="flex items-center flex-1 space-x-2">
+          <input
+            type="text"
+            className="flex-1 border border-gray-400 rounded px-2 py-1"
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <button
+            className="text-blue-500 hover:text-blue-700"
+            onClick={handleEdit}
+          >
+            Update
+          </button>
+          <button
+            className="text-red-500 hover:text-red-700"
+            onClick={handleCancel}
+          >
+            Cancel
+          </button>
+        </div>
+      ) : (
+        <div className={`select-none flex-1 ${completed && 'line-through'}`}>
+          {text}
+        </div>
+      )}
+
+      {isHovered && !isEditing && (
+        <button
+          className="text-blue-500 hover:text-blue-700 ml-2"
+          onClick={() => setIsEditing(true)}
+        >
+          Edit
+        </button>
+      )}
 
       <div
         className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 border-green-500 ${

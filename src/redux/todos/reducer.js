@@ -4,6 +4,7 @@ import {
   CLEARCOMPLETED,
   COLORSELECTED,
   DELETED,
+  EDIT,
   FETCHED,
   TOGGLED,
 } from './actionTypes';
@@ -51,6 +52,12 @@ const reducer = (state = [], action) => {
           color: color,
         };
       });
+
+    case EDIT:
+      const { id, editedText } = action.payload;
+      return state.map((todo) =>
+        todo.id === id ? { ...todo, text: editedText } : todo
+      );
 
     case DELETED:
       return state.filter((todo) => todo.id !== action.payload);
