@@ -3,7 +3,12 @@
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { colorSelected, deleted, toggled, textEdited } from '../redux/todos/actions';
+import {
+  colorSelected,
+  deleted,
+  toggled,
+  textEdited,
+} from '../redux/todos/actions';
 
 export default function Todo({ todo }) {
   const dispatch = useDispatch();
@@ -27,8 +32,12 @@ export default function Todo({ todo }) {
   };
 
   const handleEdit = () => {
-    dispatch(textEdited(id, editedText));
-    setIsEditing(false);
+    if (editedText.trim() !== '') {
+      dispatch(textEdited(id, editedText));
+      setIsEditing(false);
+      return;
+    }
+    alert('Empty input!');
   };
 
   const handleCancel = () => {

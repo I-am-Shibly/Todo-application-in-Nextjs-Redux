@@ -8,12 +8,14 @@ import { thunk } from 'redux-thunk';
 import { deleteTodoMiddleware } from './middlewares/deleteTodoMiddleware';
 import { completeAllTodoMiddleware } from './middlewares/completeAllMiddleware';
 import { clearCompletedTodoMiddleware } from './middlewares/clearCompletedMiddleware';
+import { editTodoMiddleware } from './middlewares/editTodoMiddleware';
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(
     applyMiddleware(
       saveTodoMiddleware,
+      editTodoMiddleware,
       updateStatusMiddleware,
       updateColorMiddleware,
       deleteTodoMiddleware,
