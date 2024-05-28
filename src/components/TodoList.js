@@ -11,6 +11,7 @@ export default function TodoList() {
   const filters = useSelector((state) => state.filters);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentEditingId, setCurrentEditingId] = useState(null);
   const todosPerPage = 5;
 
   useEffect(() => {
@@ -57,7 +58,14 @@ export default function TodoList() {
     <div>
       <div className="mt-2 text-gray-700 text-sm max-h-[300px] overflow-y-auto">
         {currentTodos.length > 0 ? (
-          currentTodos.map((todo) => <Todo todo={todo} key={todo?.id} />)
+          currentTodos.map((todo) => (
+            <Todo
+              todo={todo}
+              key={todo?.id}
+              currentEditingId={currentEditingId}
+              setCurrentEditingId={setCurrentEditingId}
+            />
+          ))
         ) : (
           <h1>No todo found!</h1>
         )}
