@@ -87,9 +87,14 @@ export default function Todo({ todo }) {
             onChange={(e) => setEditedText(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <button
-            className="text-blue-500 hover:text-blue-700"
+            <button
+            className={`px-2 py-1 rounded ${
+              editedText === text
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-blue-500 text-white hover:bg-blue-700'
+            }`}
             onClick={handleEdit}
+            disabled={editedText === text}
           >
             Update
           </button>
