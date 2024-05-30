@@ -3,6 +3,7 @@ import {
   ALLCOMPLETED,
   CLEARCOMPLETED,
   COLORSELECTED,
+  DATESELECTED,
   DELETED,
   EDIT,
   FETCHED,
@@ -52,6 +53,12 @@ const reducer = (state = [], action) => {
           color: color,
         };
       });
+
+    case DATESELECTED:
+      const { id: dateTodoId, time } = action.payload;
+      return state.map((todo) =>
+        todo.id === dateTodoId ? { ...todo, time } : todo
+      );
 
     case EDIT:
       const { id, editedText } = action.payload;

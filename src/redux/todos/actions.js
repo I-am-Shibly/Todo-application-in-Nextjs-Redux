@@ -3,6 +3,7 @@ import {
   ALLCOMPLETED,
   CLEARCOMPLETED,
   COLORSELECTED,
+  DATESELECTED,
   DELETED,
   EDIT,
   FETCHED,
@@ -46,6 +47,16 @@ export const colorSelected = (todoId, color) => {
     payload: {
       todoId,
       color,
+    },
+  };
+};
+
+export const dateSelected = (id, time) => {
+  return {
+    type: DATESELECTED,
+    payload: {
+      id,
+      time,
     },
   };
 };
