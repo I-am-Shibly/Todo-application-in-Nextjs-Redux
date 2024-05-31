@@ -105,12 +105,12 @@ export default function Todo({ todo, currentEditingId, setCurrentEditingId }) {
     <div
       className={`relative flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0 ${
         warningColor === 'green'
-          ? 'bg-green-100 hover:bg-green-200'
+          ? 'bg-lime-100 hover:bg-lime-200'
           : warningColor === 'gray'
           ? 'bg-gray-100 hover:bg-gray-200'
           : warningColor === 'red'
           ? 'bg-red-100 hover:bg-red-200'
-          : ''
+          : 'bg-white'
       }
       `}
       onMouseEnter={() => setIsHovered(true)}
