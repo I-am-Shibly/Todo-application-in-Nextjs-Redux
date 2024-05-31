@@ -19,6 +19,8 @@ Welcome to the Todo Application, a simple yet powerful tool to help you manage y
 - Add, update, delete, and view todos
 - Color-based filtering for priority levels (high, medium, low)
 - Status-based filtering (all, incomplete, completed)
+- User can set a time
+- The background of the to-do list will change according to the time set.
 - Mark all todos as completed with one click
 - Delete all completed todos
 - Browser local storage used as database
